@@ -51,10 +51,9 @@ d3.csv("assets/data/data.csv").then(function(data) {
     .append("circle")
     .attr("cx", d => xLinearScale(d.poverty))
     .attr("cy", d => yLinearScale(d.healthcare))
-    .attr("text", d => d.abbr)
-    .attr("r", "10")
+    .attr("r", "14")
     .attr("fill", "blue")
-    .attr("opacity", ".75");
+    .attr("opacity", ".6");
 
   var toolTip = d3.tip()
     .attr("class", "tooltip")
@@ -71,6 +70,18 @@ d3.csv("assets/data/data.csv").then(function(data) {
     .on("mouseout", function(d, i) {
       toolTip.hide(d);
     });
+
+    chartGroup.append("text")
+      .style("font-size", "13px")
+      .selectAll("tspan")
+      .data(data)
+      .enter()
+      .append("tspan")
+      .attr("x", d => xLinearScale(d.poverty))
+      .attr("y", d => yLinearScale(d.healthcare))
+      .attr("text-anchor", "middle")
+      .text(d => d.abbr)
+      .attr("fill", "white");
 
     chartGroup.append("text")
       .attr("transform", "rotate(-90)")
